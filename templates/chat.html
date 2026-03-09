@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Secure Chat</title>
+<link rel="stylesheet" href="/static/style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>Chats</h2>
+
+<input class="search" placeholder="Search users">
+
+<div class="user">User1</div>
+<div class="user">User2</div>
+<div class="user">User3</div>
+
+</div>
+
+<!-- CHAT AREA -->
+
+<div class="chat">
+
+<div class="chat-header">
+
+<h3>User1</h3>
+
+<span id="typing"></span>
+
+</div>
+
+<div class="messages" id="messages"></div>
+
+<div class="chat-input">
+
+<input id="msg" placeholder="Type a message...">
+
+<button onclick="addEmoji()">😀</button>
+
+<button onclick="sendMsg()">Send</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
