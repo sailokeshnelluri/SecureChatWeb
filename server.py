@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, send, emit
+from flask_socketio import SocketIO, send
+from encryption import aes_encrypt, aes_decrypt
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -14,11 +15,16 @@ def chat():
 
 @socketio.on("message")
 def handleMessage(msg):
-    send(msg, broadcast=True, include_self=False)
 
-@socketio.on("typing")
-def typing():
-    emit("typing", broadcast=True, include_self=False)
+    # decrypt incoming encrypted message
+    decrypted = aes_decrypt(msg)
+
+    print("Decrypted:", decrypted)
+
+    # encrypt again before sending
+    encrypted = aes_encrypt(decrypted)
+
+    send(encrypted, broadcast=True, include_self=False)
 
 if __name__ == "__main__":
-    socketio.run(app, host="127.0.0.1", port=5000)
+    socketio.run(app)
